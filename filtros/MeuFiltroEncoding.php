@@ -1,6 +1,6 @@
 <?php
 
-class MeuFiltro extends php_user_filter
+class MeuFiltroEncoding extends php_user_filter
 {
     public $stream;
 
@@ -18,9 +18,8 @@ class MeuFiltro extends php_user_filter
             $linhas = explode("\n", $bucket->data);
 
             foreach ($linhas as $linha) {
-                if (stripos($linha, 'parte') !== false){
-                    $saida .= "$linha\n";
-                }
+                $encoding = mb_convert_encoding($linha, "UTF-8", "Windows-1252");
+                $saida .= "$encoding\n";
             }
         }
 
